@@ -2,10 +2,11 @@
 name: CICD
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # (manual) (delivery)
 
 jobs:
   code:
+    # every job needs runner  
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
