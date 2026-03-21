@@ -1,956 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio of Teja - Full Stack Developer, AI Enthusiast & DevOps Learner">
-    <title>Teja | Developer Portfolio</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Phosphor Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
-    <style>
-        /* ==== CSS VARIABLES ==== */
-        :root {
-            --bg-color: #050510;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            
-            /* Neon Accents */
-            --accent-primary: #38bdf8;   /* Cyan */
-            --accent-secondary: #c084fc; /* Purple */
-            --accent-tertiary: #2dd4bf;  /* Teal */
-            
-            /* Glassmorphism */
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-hover-bg: rgba(255, 255, 255, 0.06);
-            --glass-hover-border: rgba(255, 255, 255, 0.2);
-            
-            /* Transitions */
-            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Teja Poosa | Portfolio</title>
 
-        /* ==== RESET & SETUP ==== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-        html {
-            scroll-behavior: smooth;
-        }
+<!-- Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
-            position: relative;
-        }
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-        ::selection {
-            background-color: var(--accent-primary);
-            color: #000;
-        }
+<style>
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-color);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-primary);
-        }
+body {
+  font-family: "Inter", sans-serif;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: white;
+  scroll-behavior: smooth;
+}
 
-        /* ==== TYPOGRAPHY ==== */
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 600;
-            line-height: 1.2;
-        }
+/* Glass effect */
+.glass {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
 
-        .text-gradient {
-            background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+/* Glow */
+.glow {
+  box-shadow: 0 0 25px rgba(59,130,246,0.5);
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+/* gradient text */
+.gradient {
+  background: linear-gradient(90deg,#60a5fa,#a78bfa,#22d3ee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-        .section {
-            padding: 100px 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+/* animation */
+.fade {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s;
+}
 
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            position: relative;
-            display: inline-block;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 40px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-primary), transparent);
-            border-radius: 2px;
-        }
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-        /* ==== BACKGROUND BLOBS ==== */
-        .blob {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(120px);
-            z-index: -1;
-            opacity: 0.35;
-            animation: float 20s infinite ease-in-out alternate;
-            pointer-events: none;
-        }
-        .blob-1 {
-            top: -10%;
-            left: -10%;
-            width: 600px;
-            height: 600px;
-            background: var(--accent-primary);
-        }
-        .blob-2 {
-            bottom: -10%;
-            right: -10%;
-            width: 700px;
-            height: 700px;
-            background: var(--accent-secondary);
-            animation-delay: -5s;
-            animation-duration: 25s;
-        }
-        .blob-3 {
-            top: 40%;
-            left: 40%;
-            width: 500px;
-            height: 500px;
-            background: var(--accent-tertiary);
-            animation-delay: -10s;
-            animation-duration: 18s;
-        }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(50px, 50px) scale(1.1); }
-        }
-
-        /* ==== GLASSMORPHISM UTILITIES ==== */
-        .glass-nav {
-            background: rgba(5, 5, 16, 0.6);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 2.5rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            transition: var(--transition-smooth);
-        }
-
-        .interactive-card {
-            position: relative;
-            overflow: hidden;
-        }
-        .interactive-card::before {
-            content: '';
-            position: absolute;
-            top: var(--y, 50%);
-            left: var(--x, 50%);
-            transform: translate(-50%, -50%);
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 60%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .interactive-card:hover::before {
-            opacity: 1;
-        }
-        .interactive-card:hover {
-            border-color: var(--glass-hover-border);
-            background: var(--glass-hover-bg);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-        }
-        .interactive-card > * {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ==== BUTTONS ==== */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.8rem 1.8rem;
-            border-radius: 12px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: var(--transition-smooth);
-            cursor: pointer;
-            font-family: inherit;
-            border: none;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-primary), #2563eb);
-            color: white;
-            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
-        }
-
-        .glow-btn:hover {
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.6);
-            transform: translateY(-2px);
-        }
-
-        .glass-btn {
-            background: var(--glass-bg);
-            color: var(--text-primary);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-        }
-        .glass-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        /* ==== NAVIGATION ==== */
-        #navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: var(--transition-smooth);
-        }
-        #navbar.scrolled {
-            padding: 0.8rem 0;
-        }
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: var(--accent-primary);
-            transition: width 0.3s ease;
-        }
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        .mobile-menu-btn {
-            display: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: var(--text-primary);
-        }
-
-        /* ==== HERO SECTION ==== */
-        .hero-section {
-            position: relative;
-        }
-        .greeting {
-            font-size: 1.2rem;
-            color: var(--accent-primary);
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        .name {
-            font-size: clamp(4rem, 8vw, 6rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            letter-spacing: -2px;
-        }
-        .typewriter-placeholder {
-            margin-bottom: 1.5rem;
-        }
-        .title {
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            color: var(--text-secondary);
-            font-weight: 400;
-        }
-        .divider {
-            color: rgba(255,255,255,0.2);
-            margin: 0 10px;
-        }
-        .hero-desc {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin-bottom: 2.5rem;
-        }
-        .hero-buttons {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-        .social-icons-hero {
-            display: flex;
-            gap: 1rem;
-            margin-left: 1rem;
-        }
-        .social-icons-hero a {
-            color: var(--text-secondary);
-            font-size: 1.8rem;
-            transition: all 0.3s ease;
-        }
-        .social-icons-hero a:hover {
-            color: var(--accent-primary);
-            transform: scale(1.1);
-        }
-
-        /* ==== ABOUT SECTION ==== */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-        .about-text {
-            font-size: 1.1rem;
-        }
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-        .about-text p:last-child {
-            margin-bottom: 0;
-        }
-        .about-text strong {
-            color: var(--text-primary);
-        }
-        .icon-large {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-        }
-        .career-goal {
-            padding-top: 1.5rem;
-            margin-top: 1.5rem;
-            border-top: 1px solid var(--glass-border);
-        }
-
-        /* ==== SKILLS SECTION ==== */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-        .skill-category {
-            padding: 2rem;
-        }
-        .span-2 {
-            grid-column: span 2;
-        }
-        .skill-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        .skill-header i {
-            font-size: 2rem;
-            color: var(--accent-secondary);
-        }
-        .skill-header h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            list-style: none;
-        }
-        .skill-tags li {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            transition: var(--transition-smooth);
-        }
-        .skill-tags li:hover {
-            background: rgba(56, 189, 248, 0.15);
-            border-color: var(--accent-primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* ==== PROJECTS SECTION ==== */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-        .project-card {
-            padding: 0;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-        .project-img-placeholder {
-            height: 200px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-bottom: 1px solid var(--glass-border);
-        }
-        .project-img-placeholder i {
-            font-size: 5rem;
-            color: rgba(255,255,255,0.5);
-        }
-        .project-info {
-            padding: 2rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .project-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        .project-info p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            flex: 1;
-        }
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-        .tech-stack span {
-            font-size: 0.8rem;
-            color: var(--accent-tertiary);
-            background: rgba(45, 212, 191, 0.1);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-        }
-        .project-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        /* ==== EXPERIENCE SECTION ==== */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 40px;
-            top: 0;
-            height: 100%;
-            width: 2px;
-            background: var(--glass-border);
-        }
-        .timeline-item {
-            position: relative;
-            margin-bottom: 2rem;
-            padding: 2rem 2rem 2rem 6rem;
-            margin-left: 20px;
-        }
-        .timeline-icon {
-            position: absolute;
-            left: -20px;
-            top: 2rem;
-            width: 44px;
-            height: 44px;
-            background: var(--bg-color);
-            border: 2px solid var(--accent-primary);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.2rem;
-            color: var(--accent-primary);
-            z-index: 2;
-        }
-        .timeline-content h3 {
-            font-size: 1.4rem;
-            color: var(--text-primary);
-            margin-bottom: 0.8rem;
-        }
-        .timeline-content p {
-            color: var(--text-secondary);
-        }
-
-        /* ==== CONTACT SECTION ==== */
-        .contact-card {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-        .contact-desc {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-        }
-        .contact-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.5rem;
-        }
-        .contact-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 1.5rem;
-            min-width: 150px;
-            text-decoration: none;
-            border-radius: 16px;
-        }
-        .contact-item i {
-            font-size: 2.5rem;
-            color: var(--accent-secondary);
-        }
-        .large-btn {
-            padding: 1rem 2.5rem;
-            font-size: 1.1rem;
-            border-radius: 12px;
-        }
-        .footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--glass-border);
-        }
-
-        /* ==== RESPONSIVE DESIGN ==== */
-        @media (max-width: 1024px) {
-            .span-2 {
-                grid-column: span 1;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none; /* Can add a mobile menu toggle via JS later */
-            }
-            .mobile-menu-btn {
-                display: block;
-            }
-            .hero-buttons {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .timeline::before {
-                left: 30px;
-            }
-            .timeline-item {
-                padding: 1.5rem 1.5rem 1.5rem 4rem;
-                margin-left: 10px;
-            }
-            .timeline-icon {
-                left: -20px;
-                width: 40px;
-                height: 40px;
-            }
-        }
-
-        /* ==== ANIMATIONS ==== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+</style>
 </head>
+
 <body>
 
-    <!-- Animated Background Blobs -->
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
+<!-- NAVBAR -->
 
-    <!-- Navigation -->
-    <nav id="navbar" class="glass-nav">
-        <div class="nav-container">
-            <a href="#hero" class="logo text-gradient">&lt;Teja /&gt;</a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="mobile-menu-btn">
-                <i class="ph ph-list"></i>
-            </div>
-        </div>
-    </nav>
+<nav class="fixed top-0 w-full z-50 glass px-8 py-4 flex justify-between">
 
-    <main>
-        <!-- Hero Section -->
-        <header id="hero" class="section hero-section reveal">
-            <div class="container hero-content">
-                <p class="greeting">Hello World, I'm</p>
-                <h1 class="name text-gradient">Teja</h1>
-                <div class="typewriter-placeholder">
-                    <h2 class="title">Full Stack Developer <span class="divider">|</span> AI Enthusiast <span class="divider">|</span> DevOps Learner</h2>
-                </div>
-                <p class="hero-desc">Final year CS student passionate about building scalable applications and exploring the realms of Artificial Intelligence and Systems.</p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary glow-btn">
-                        <i class="ph ph-rocket-launch"></i> View Work
-                    </a>
-                    <a href="resume.pdf" target="_blank" class="btn btn-secondary glass-btn">
-                        <i class="ph ph-file-text"></i> Resume
-                    </a>
-                    <div class="social-icons-hero">
-                        <a href="#" target="_blank" aria-label="GitHub"><i class="ph ph-github-logo"></i></a>
-                        <a href="#" target="_blank" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-                    </div>
-                </div>
-            </div>
-        </header>
+<h1 class="font-bold text-xl gradient">Teja.dev</h1>
 
-        <!-- About Section -->
-        <section id="about" class="section reveal">
-            <div class="container">
-                <h2 class="section-title">About Me</h2>
-                <div class="about-grid">
-                    <div class="about-text glass-panel interactive-card">
-                        <i class="ph ph-terminal-window icon-large text-gradient"></i>
-                        <p>I'm a <strong>Final year Computer Science student</strong> with a strong foundation in C++, Data Structures, Algorithms, and problem-solving through extensive LeetCode practice.</p>
-                        <p>As a <strong>Web Developer</strong>, I build modern applications using React, Vite, Tailwind CSS, Node.js, and MongoDB. I'm actively expanding my horizons by currently learning DevOps, Docker, Linux, and System Design.</p>
-                        <p class="career-goal"><strong>Career Goal:</strong> Seeking exciting roles in AI, Full Stack Development, and DevOps to build impactful and scalable software.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+<div class="space-x-6 hidden md:block">
 
-        <!-- Skills Section -->
-        <section id="skills" class="section reveal">
-            <div class="container">
-                <h2 class="section-title">Technical Skills</h2>
-                <div class="skills-grid">
-                    <div class="skill-category glass-panel interactive-card">
-                        <div class="skill-header">
-                            <i class="ph ph-code"></i>
-                            <h3>Languages</h3>
-                        </div>
-                        <ul class="skill-tags">
-                            <li>C++</li>
-                            <li>JavaScript</li>
-                            <li>Python</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="skill-category glass-panel interactive-card">
-                        <div class="skill-header">
-                            <i class="ph ph-browser"></i>
-                            <h3>Frontend</h3>
-                        </div>
-                        <ul class="skill-tags">
-                            <li>React</li>
-                            <li>Tailwind CSS</li>
-                            <li>HTML</li>
-                            <li>CSS</li>
-                        </ul>
-                    </div>
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
 
-                    <div class="skill-category glass-panel interactive-card">
-                        <div class="skill-header">
-                            <i class="ph ph-database"></i>
-                            <h3>Backend</h3>
-                        </div>
-                        <ul class="skill-tags">
-                            <li>Node.js</li>
-                            <li>Express</li>
-                            <li>MongoDB</li>
-                        </ul>
-                    </div>
+</div>
 
-                    <div class="skill-category glass-panel interactive-card">
-                        <div class="skill-header">
-                            <i class="ph ph-wrench"></i>
-                            <h3>Tools</h3>
-                        </div>
-                        <ul class="skill-tags">
-                            <li>Git</li>
-                            <li>Docker</li>
-                            <li>Linux</li>
-                            <li>VS Code</li>
-                        </ul>
-                    </div>
+</nav>
 
-                    <div class="skill-category glass-panel interactive-card span-2">
-                        <div class="skill-header">
-                            <i class="ph ph-brain"></i>
-                            <h3>Core Concepts</h3>
-                        </div>
-                        <ul class="skill-tags">
-                            <li>Data Structures & Algorithms (DSA)</li>
-                            <li>Object-Oriented Programming (OOP)</li>
-                            <li>Operating Systems (OS)</li>
-                            <li>Computer Networks (CN)</li>
-                            <li>Database Management (DBMS)</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="section reveal">
-            <div class="container">
-                <h2 class="section-title">Projects</h2>
-                <div class="projects-grid">
-                    <!-- Project 1 -->
-                    <div class="project-card glass-panel interactive-card">
-                        <div class="project-img-placeholder" style="background: linear-gradient(135deg, #10b98150, #04785750);">
-                            <i class="ph ph-chat-centered-text"></i>
-                        </div>
-                        <div class="project-info">
-                            <h3>WhatsApp Chat Analyzer</h3>
-                            <p>A comprehensive data analysis tool to extract insights, statistics, and sentiment from WhatsApp chat exports.</p>
-                            <div class="tech-stack">
-                                <span>React</span>
-                                <span>Python</span>
-                                <span>Data Analysis</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="#" class="glass-btn"><i class="ph ph-github-logo"></i> Code</a>
-                                <a href="#" class="glow-btn btn-primary"><i class="ph ph-arrow-square-out"></i> Live</a>
-                            </div>
-                        </div>
-                    </div>
+<!-- HERO -->
 
-                    <!-- Project 2 -->
-                    <div class="project-card glass-panel interactive-card">
-                        <div class="project-img-placeholder" style="background: linear-gradient(135deg, #8b5cf650, #6d28d950);">
-                            <i class="ph ph-waveform"></i>
-                        </div>
-                        <div class="project-info">
-                            <h3>Real-time Meeting Transcription & Summarizer</h3>
-                            <p>An AI-powered tool that transcribes live meetings and generates concise summaries with key action items.</p>
-                            <div class="tech-stack">
-                                <span>AI</span>
-                                <span>React</span>
-                                <span>Node.js</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="#" class="glass-btn"><i class="ph ph-github-logo"></i> Code</a>
-                                <a href="#" class="glow-btn btn-primary"><i class="ph ph-arrow-square-out"></i> Live</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<section class="h-screen flex flex-col justify-center items-center text-center">
 
-        <!-- Experience / Learning Section -->
-        <section id="experience" class="section reveal">
-            <div class="container">
-                <h2 class="section-title">Experience & Learning</h2>
-                <div class="timeline">
-                    <div class="timeline-item glass-panel interactive-card">
-                        <div class="timeline-icon">
-                            <i class="ph ph-infinity"></i>
-                        </div>
-                        <div class="timeline-content">
-                            <h3>90 Days DevOps Challenge</h3>
-                            <p>Actively participating in a rigorous 90-day challenge to master Linux, Git, Docker, CI/CD, and Cloud fundamentals.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item glass-panel interactive-card">
-                        <div class="timeline-icon">
-                            <i class="ph ph-code"></i>
-                        </div>
-                        <div class="timeline-content">
-                            <h3>Consistent LeetCode Practice</h3>
-                            <p>Solving complex algorithmic problems daily to sharpen Data Structures and Algorithms skills. Focusing on dynamic programming, graphs, and system design.</p>
-                        </div>
-                    </div>
+<h1 class="text-5xl font-bold gradient">
+Teja Poosa
+</h1>
 
-                    <div class="timeline-item glass-panel interactive-card">
-                        <div class="timeline-icon">
-                            <i class="ph ph-tent"></i>
-                        </div>
-                        <div class="timeline-content">
-                            <h3>Hackathon Participation</h3>
-                            <p>Collaborating in team environments under tight deadlines to prototype innovative solutions using modern web and AI technologies.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<p class="mt-4 text-xl text-gray-300">
+Full Stack | DevOps | React | AI Projects
+</p>
 
-        <!-- Contact Section -->
-        <section id="contact" class="section reveal">
-            <div class="container">
-                <h2 class="section-title">Get In Touch</h2>
-                <div class="contact-card glass-panel interactive-card">
-                    <p class="contact-desc">I'm currently looking for new opportunities in AI, Full Stack Development, and DevOps. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
-                    
-                    <div class="contact-links">
-                        <a href="mailto:your-email@example.com" class="contact-item glass-btn">
-                            <i class="ph ph-envelope-simple"></i>
-                            <span>Email Me</span>
-                        </a>
-                        <a href="#" class="contact-item glass-btn">
-                            <i class="ph ph-github-logo"></i>
-                            <span>GitHub</span>
-                        </a>
-                        <a href="#" class="contact-item glass-btn">
-                            <i class="ph ph-linkedin-logo"></i>
-                            <span>LinkedIn</span>
-                        </a>
-                    </div>
-                    
-                    <a href="resume.pdf" target="_blank" class="glow-btn btn-primary large-btn" style="margin-top: 2rem;">
-                        <i class="ph ph-download-simple"></i> Download Resume
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
+<p class="mt-2 text-gray-400 max-w-xl">
+Computer Science Student building modern web apps,
+DevOps projects, and real-world AI tools.
+</p>
 
-    <footer class="glass-nav footer">
-        <p>&copy; 2026 Teja. Designed & Built with ❤️</p>
-    </footer>
+<div class="mt-6 space-x-4">
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
+<button class="px-6 py-3 glass glow rounded-xl">
+View Projects
+</button>
 
-            // 1. Navbar Scroll Effect
-            const navbar = document.getElementById('navbar');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-            });
+<button class="px-6 py-3 glass rounded-xl">
+Contact
+</button>
 
-            // 2. Scroll Reveal Animation using Intersection Observer
-            const revealElements = document.querySelectorAll('.reveal');
-            const revealOptions = {
-                threshold: 0.15,
-                rootMargin: "0px 0px -50px 0px"
-            };
+</div>
 
-            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) {
-                        return;
-                    } else {
-                        entry.target.classList.add('active');
-                        // Optional: Stop observing once revealed
-                        // observer.unobserve(entry.target);
-                    }
-                });
-            }, revealOptions);
+</section>
 
-            revealElements.forEach(el => {
-                revealOnScroll.observe(el);
-            });
 
-            // 3. Interactive Glass Cards (Mouse Spotlight Effect)
-            const cards = document.querySelectorAll('.interactive-card');
-            
-            cards.forEach(card => {
-                card.addEventListener('mousemove', e => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left; // x position within the element.
-                    const y = e.clientY - rect.top;  // y position within the element.
-                    
-                    // Set CSS variables for spotlight position
-                    card.style.setProperty('--x', `${x}px`);
-                    card.style.setProperty('--y', `${y}px`);
-                });
-            });
 
-            // Add initial active class to hero section immediately
-            const heroSection = document.getElementById('hero');
-            if (heroSection) {
-                setTimeout(() => {
-                    heroSection.classList.add('active');
-                }, 100);
-            }
+<!-- ABOUT -->
 
-        });
-    </script>
+<section id="about" class="px-10 py-20 fade">
+
+<h2 class="text-3xl font-bold gradient">About Me</h2>
+
+<p class="mt-6 text-gray-300 max-w-3xl">
+
+I am a Computer Science student passionate about building real-world projects.
+I work with React, Node.js, Docker, and modern UI design.
+
+I have built projects like:
+- WhatsApp Chat Analyzer
+- Sudoku Solver WebAssembly
+- Mumbai CleanTrack App
+- DevOps Docker Projects
+
+Currently learning DevOps and System Design.
+
+</p>
+
+</section>
+
+
+
+<!-- SKILLS -->
+
+<section id="skills" class="px-10 py-20 fade">
+
+<h2 class="text-3xl font-bold gradient mb-10">
+Skills
+</h2>
+
+<div class="grid md:grid-cols-3 gap-6">
+
+<div class="glass p-6 rounded-xl">
+<h3>Frontend</h3>
+<p>React, Tailwind, JS, HTML, CSS</p>
+</div>
+
+<div class="glass p-6 rounded-xl">
+<h3>Backend</h3>
+<p>Node.js, PHP, MySQL</p>
+</div>
+
+<div class="glass p-6 rounded-xl">
+<h3>DevOps</h3>
+<p>Docker, Linux, GitHub, CI/CD</p>
+</div>
+
+<div class="glass p-6 rounded-xl">
+<h3>Languages</h3>
+<p>C++, Python, JavaScript</p>
+</div>
+
+<div class="glass p-6 rounded-xl">
+<h3>Tools</h3>
+<p>VS Code, Git, Postman</p>
+</div>
+
+<div class="glass p-6 rounded-xl">
+<h3>Learning</h3>
+<p>Kubernetes, Cloud, System Design</p>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- PROJECTS -->
+
+<section id="projects" class="px-10 py-20 fade">
+
+<h2 class="text-3xl font-bold gradient mb-10">
+Projects
+</h2>
+
+<div class="grid md:grid-cols-3 gap-6">
+
+
+<div class="glass p-6 rounded-xl hover:scale-105 transition">
+
+<h3 class="font-bold">
+WhatsApp Chat Analyzer
+</h3>
+
+<p>
+Chat statistics, emoji analysis, timelines,
+multi-format support.
+</p>
+
+</div>
+
+
+
+<div class="glass p-6 rounded-xl hover:scale-105 transition">
+
+<h3 class="font-bold">
+Sudoku Solver Web App
+</h3>
+
+<p>
+C++ → WebAssembly → Browser solver
+with UI.
+</p>
+
+</div>
+
+
+
+<div class="glass p-6 rounded-xl hover:scale-105 transition">
+
+<h3 class="font-bold">
+Mumbai CleanTrack
+</h3>
+
+<p>
+Smart garbage reporting app using
+React Native.
+</p>
+
+</div>
+
+
+
+<div class="glass p-6 rounded-xl hover:scale-105 transition">
+
+<h3 class="font-bold">
+DevOps 90 Days Project
+</h3>
+
+<p>
+Docker, volumes, networks,
+CI/CD practice.
+</p>
+
+</div>
+
+
+
+</div>
+
+</section>
+
+
+
+<!-- CONTACT -->
+
+<section id="contact" class="px-10 py-20 fade">
+
+<h2 class="text-3xl font-bold gradient">
+Contact
+</h2>
+
+<div class="mt-6 space-y-4">
+
+<p>Email: teja@example.com</p>
+<p>GitHub: github.com/teja</p>
+<p>LinkedIn: linkedin.com/in/teja</p>
+
+</div>
+
+</section>
+
+
+
+<!-- FOOTER -->
+
+<footer class="glass text-center py-6">
+
+© 2026 Teja Poosa — Portfolio
+
+</footer>
+
+
+
+<script>
+
+lucide.createIcons()
+
+// scroll animation
+
+const faders = document.querySelectorAll(".fade");
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add("show");
+    }
+  });
+});
+
+faders.forEach(el => obs.observe(el));
+
+</script>
+
 </body>
 </html>
