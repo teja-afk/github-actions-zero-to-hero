@@ -4,13 +4,14 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-    
+
     paths:
       - '**.html'
 
-permisions:
+permissions:
   pages: write
   id-token: write
+  contents: read
 
 jobs:
   deploy:
@@ -19,7 +20,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    
+
     steps:
       # Get access to your Portfolio code via pre-built actions
       - name: Checkout code
@@ -34,4 +35,3 @@ jobs:
         uses: actions/upload-pages-artifact@v4
 
       - name: Deploy to Github pages
-      
