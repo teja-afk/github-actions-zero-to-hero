@@ -25,8 +25,8 @@ jobs:
         with:
           python-version: ${{ matrix.python-version  }}
 
-      - name: show version
+      - name: Fail on purpose
         run: |
-          python-version
+          python -version
           exit 1
 
