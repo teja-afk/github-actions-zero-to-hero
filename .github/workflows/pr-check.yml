@@ -4,7 +4,7 @@ name: PR Check
 on:
   pull_request:
     branches: [main]
-    type: [opened, syncronize]
+    type: [opened, synchronize]
 
 jobs:
   pr-job:
