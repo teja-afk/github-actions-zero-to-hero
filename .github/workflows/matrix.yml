@@ -9,9 +9,15 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     strategy:
+      fail-fast: false
+
       matrix:
         os: [ubuntu-latest, windows-latest]
         python-version: [3.11, 3.12, 3.13]
+
+        exclude:
+          - os: windows-latest
+            python-version: 3.11
 
     steps:
       - name: setup python
@@ -20,4 +26,7 @@ jobs:
           python-version: ${{ matrix.python-version  }}
 
       - name: show version
-        run: python --version
+        run: |
+          python-version
+          exit 1
+
