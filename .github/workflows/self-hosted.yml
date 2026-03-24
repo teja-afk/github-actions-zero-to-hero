@@ -1,0 +1,21 @@
+---
+name: Self Hosted Test
+on:
+  push:
+
+jobs:
+  self-hosted-job:
+    runs-on: self-hosted
+
+    steps:
+      - name: Print hostname
+        run: hostname
+
+      - name: Print Working dir
+        run: pwd
+
+      - name: Create file
+        run: echo "Hello runner" > test.txt
+
+      - name: Show file
+        run: ls
