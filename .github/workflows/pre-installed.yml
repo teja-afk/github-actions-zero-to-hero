@@ -1,0 +1,17 @@
+---
+name: Check Tools
+
+on:
+  push:
+
+jobs:
+  tools:
+    runs-on: ubunutu-latest
+
+    steps:
+      - name: Check version
+        run: |
+          docker --version
+          python3 --version
+          node --version
+          git --version
