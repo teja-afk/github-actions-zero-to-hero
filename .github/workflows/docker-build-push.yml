@@ -16,8 +16,8 @@ jobs:
         uses: docker/login-action@v4
         with:
           username: ${{ vars.DOCKERHUB_USER }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }} 
-      
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Build and push Imamge
         uses: docker/build-push-action@v6
 
@@ -28,5 +28,3 @@ jobs:
             ${{ vars.DOCKERHUB_USER }}/github-actions-zero-to-hero:${{ github.ref_name }}
             ${{ vars.DOCKERHUB_USER }}/github-actions-zero-to-hero:latest
             ${{ vars.DOCKERHUB_USER }}/github-actions-zero-to-hero:${{ github.sha }}
-
-      
