@@ -2,8 +2,9 @@
 name: Check Tools
 
 on:
-  push:
-
+  # push:
+  workflow_dispatch:
+  
 jobs:
   tools:
     runs-on: ubuntu-latest

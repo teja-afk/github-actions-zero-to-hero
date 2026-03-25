@@ -2,9 +2,9 @@
 name: Conditions Demo
 
 on:
-  push:
-  pull_request:
-
+  # push:
+  # pull_request:
+  workflow_dispatch:
 jobs:
   demo:
     runs-on: ubuntu-latest

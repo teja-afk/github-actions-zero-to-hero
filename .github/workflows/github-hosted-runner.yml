@@ -2,7 +2,8 @@
 name: Runner OS Test
 
 on:
-  push:
+  # push:
+  workflow_dispatch:
 
 jobs:
   ubuntu-job:

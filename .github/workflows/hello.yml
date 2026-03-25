@@ -1,11 +1,11 @@
 name: Hello
 
 on:
-  push:
-    branches: [main]
-    
-    paths:
-      - "**.html"
+  # push:
+  #   branches: [main]
+  workflow_dispatch:
+    # paths:
+    #   - "**.html"
 
 jobs:
   greet:
@@ -13,10 +13,10 @@ jobs:
     steps:
       - name: say hello to user
         run: echo "Hello Dosto"
-      
+
       - name: say hello to username
         run: echo "Hello $USER"
-  
+
   details:
     runs-on: ubuntu-latest
     steps:

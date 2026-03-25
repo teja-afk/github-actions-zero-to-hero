@@ -2,8 +2,9 @@
 name: Job Output Workflow
 
 on:
-  push:
-
+  # push:
+  workflow_dispatch:
+  
 jobs:
   get-date:
     runs-on: ubuntu-latest

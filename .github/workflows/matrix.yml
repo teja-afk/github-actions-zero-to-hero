@@ -2,8 +2,9 @@
 name: Matrix Build
 
 on:
-  push:
-
+  # push:
+  workflow_dispatch:
+  
 jobs:
   build:
     runs-on: ${{ matrix.os }}

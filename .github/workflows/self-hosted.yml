@@ -1,8 +1,9 @@
 ---
 name: Self Hosted Test
 on:
-  push:
-
+  # push:
+  workflow_dispatch:
+  
 jobs:
   self-hosted-job:
     runs-on: [self-hosted, my-linux-runner]
