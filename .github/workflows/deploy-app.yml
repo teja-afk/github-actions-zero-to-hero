@@ -6,7 +6,7 @@ on:
     workflows: ["Docker build & push"]
     types: [completed]
     branches:
-     - main:
+      - main:
 
 jobs:
   deploy:
