@@ -2,3 +2,4 @@ flake8
 flask
 bandit
 pygments==2.19.2
+gunicorn
