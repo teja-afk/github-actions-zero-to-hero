@@ -17,10 +17,10 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install Pip Autdit
-        run: pip install pip-audit
-        with:
-          python-version: "3.12"
+      - name: Install pip-audit
+        run: |
+          python -m pip install --upgrade pip
+          pip install pip-audit
 
       - name: Audit dependencies
         run: pip-audit -r requirements.txt
