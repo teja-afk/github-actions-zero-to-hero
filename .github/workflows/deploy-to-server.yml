@@ -31,7 +31,7 @@ jobs:
           target: ~/devops
 
       - name: SSH to Prod server & run the app
-        uses: appleboy/scp-action@v1.0.3
+        uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.EC2_SSH_HOST }}
           username: ${{ secrets.EC2_SSH_USER }}
