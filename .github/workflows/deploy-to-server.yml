@@ -4,15 +4,17 @@ on:
   workflow_call:
 
 jobs:
-  build:
-    name: Build
+  deploy:
     runs-on: ubuntu-latest
+    env:
+      DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
+      DOCKER_TAG: ${{ github.sha }}
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: SSH to prod server
+      - name: SSH to prod server & Create app folder
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_SSH_HOST }}
