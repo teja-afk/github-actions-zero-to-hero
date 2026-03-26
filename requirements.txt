@@ -3,3 +3,4 @@ flask
 bandit
 pygments==2.19.2
 gunicorn
+pytest
